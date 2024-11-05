@@ -1,7 +1,7 @@
 // This is the Login Screen
 // No navigation yet, just plain UI
 // Sign Up and Forgot Password screens are located in "screens" folder
-// By Sheen Ocon | IT3R10
+// Same exact content as App.js
 
 import React, { useEffect } from "react";
 import {
