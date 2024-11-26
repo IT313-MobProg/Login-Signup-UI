@@ -14,16 +14,19 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import { useRouter } from "expo-router";
 
 export default function ForgotPassword({ navigation }) {
   const [loaded, error] = useFonts({
-    "Poppins-Bold": require("./assets/fonts/Poppins/Poppins-Bold.ttf"),
-    "Poppins-Regular": require("./assets/fonts/Poppins/Poppins-Regular.ttf"),
-    "Poppins-SemiBold": require("./assets/fonts/Poppins/Poppins-SemiBold.ttf"),
-    "Inter-Bold": require("./assets/fonts/Inter/Inter-Bold.ttf"),
-    "Inter-Regular": require("./assets/fonts/Inter/Inter-Regular.ttf"),
-    "Inter-SemiBold": require("./assets/fonts/Inter/Inter-SemiBold.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins/Poppins-Bold.ttf"),
+    "Poppins-Regular": require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
+    "Poppins-SemiBold": require("../assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+    "Inter-Bold": require("../assets/fonts/Inter/Inter-Bold.ttf"),
+    "Inter-Regular": require("../assets/fonts/Inter/Inter-Regular.ttf"),
+    "Inter-SemiBold": require("../assets/fonts/Inter/Inter-SemiBold.ttf"),
   });
+
+  const router = useRouter();
 
   useEffect(() => {
     if (loaded || error) {
@@ -54,7 +57,10 @@ export default function ForgotPassword({ navigation }) {
           />
         </View>
 
-        <TouchableOpacity style={styles.verifyButton}>
+        <TouchableOpacity
+          style={styles.verifyButton}
+          onPress={() => router.replace("/dashboard")}
+        >
           <Text style={styles.verifyButtonText}>Verify</Text>
         </TouchableOpacity>
 
@@ -62,7 +68,7 @@ export default function ForgotPassword({ navigation }) {
           <Text style={styles.rememberedYourPass}>
             Remembered your password?
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => router.navigate("/")}>
             <Text style={styles.loginLink}> Log in</Text>
           </TouchableOpacity>
         </View>

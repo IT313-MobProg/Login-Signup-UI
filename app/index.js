@@ -14,19 +14,22 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import { useRouter } from "expo-router";
 
-export default function App() {
+export default function Login() {
   useEffect(() => {
     SplashScreen.preventAutoHideAsync();
   }, []);
 
+  const router = useRouter();
+
   const [loaded, error] = useFonts({
-    "Poppins-Bold": require("./assets/fonts/Poppins/Poppins-Bold.ttf"),
-    "Poppins-Regular": require("./assets/fonts/Poppins/Poppins-Regular.ttf"),
-    "Poppins-SemiBold": require("./assets/fonts/Poppins/Poppins-SemiBold.ttf"),
-    "Inter-Bold": require("./assets/fonts/Inter/Inter-Bold.ttf"),
-    "Inter-Regular": require("./assets/fonts/Inter/Inter-Regular.ttf"),
-    "Inter-SemiBold": require("./assets/fonts/Inter/Inter-SemiBold.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins/Poppins-Bold.ttf"),
+    "Poppins-Regular": require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
+    "Poppins-SemiBold": require("../assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+    "Inter-Bold": require("../assets/fonts/Inter/Inter-Bold.ttf"),
+    "Inter-Regular": require("../assets/fonts/Inter/Inter-Regular.ttf"),
+    "Inter-SemiBold": require("../assets/fonts/Inter/Inter-SemiBold.ttf"),
   });
 
   useEffect(() => {
@@ -66,18 +69,21 @@ export default function App() {
       </View>
 
       <View style={{ alignItems: "flex-end" }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.navigate("/ForgotPassword")}>
           <Text style={styles.forgotPasswordText}>Forgot password?</Text>
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.loginButton}>
+      <TouchableOpacity
+        style={styles.loginButton}
+        onPress={() => router.replace("/dashboard")}
+      >
         <Text style={styles.loginButtonText}>Log In</Text>
       </TouchableOpacity>
 
       <View style={styles.signUpContainer}>
         <Text style={styles.signUpText}>Don't have an account yet?</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push("/Signup")}>
           <Text style={styles.signUpLink}> Sign up</Text>
         </TouchableOpacity>
       </View>

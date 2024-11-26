@@ -3,7 +3,7 @@
 // Screen for Log In is the "App.js" file
 // Screen for Forgot Password is called the "ForgotPassword.js" file located in the same directory as this one
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import {
   StyleSheet,
   Text,
@@ -16,20 +16,23 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import { useRouter } from "expo-router";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function SignUp({ navigation }) {
+export default function Signup({ navigation }) {
   const [gender, setGender] = useState("Male");
   const [termsAccepted, setTermsAccepted] = useState(false);
 
+  const router = useRouter();
+
   const [loaded, error] = useFonts({
-    "Poppins-Bold": require("./assets/fonts/Poppins/Poppins-Bold.ttf"),
-    "Poppins-Regular": require("./assets/fonts/Poppins/Poppins-Regular.ttf"),
-    "Poppins-SemiBold": require("./assets/fonts/Poppins/Poppins-SemiBold.ttf"),
-    "Inter-Bold": require("./assets/fonts/Inter/Inter-Bold.ttf"),
-    "Inter-Regular": require("./assets/fonts/Inter/Inter-Regular.ttf"),
-    "Inter-SemiBold": require("./assets/fonts/Inter/Inter-SemiBold.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins/Poppins-Bold.ttf"),
+    "Poppins-Regular": require("../assets/fonts/Poppins/Poppins-Regular.ttf"),
+    "Poppins-SemiBold": require("../assets/fonts/Poppins/Poppins-SemiBold.ttf"),
+    "Inter-Bold": require("../assets/fonts/Inter/Inter-Bold.ttf"),
+    "Inter-Regular": require("../assets/fonts/Inter/Inter-Regular.ttf"),
+    "Inter-SemiBold": require("../assets/fonts/Inter/Inter-SemiBold.ttf"),
   });
 
   useEffect(() => {
@@ -132,13 +135,16 @@ export default function SignUp({ navigation }) {
           </Text>
         </View>
 
-        <TouchableOpacity style={styles.signUpButton}>
+        <TouchableOpacity
+          style={styles.signUpButton}
+          onPress={() => router.replace("/dashboard")}
+        >
           <Text style={styles.signUpButtonText}>Sign Up</Text>
         </TouchableOpacity>
 
         <View style={styles.alrHaveAnAccContainer}>
           <Text style={styles.alreadyHaveAnAcc}>Already have an account?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => router.navigate("/")}>
             <Text style={styles.loginLink}> Log in</Text>
           </TouchableOpacity>
         </View>
@@ -149,6 +155,7 @@ export default function SignUp({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#fff",
     alignItems: "center",
     padding: 20,
   },
